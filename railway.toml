@@ -1,0 +1,5 @@
+[service]
+name = 'whatsapp-api'
+[env]
+# Railway sets PORT automatically; this is just for local defaults.
+PORT = '3000'

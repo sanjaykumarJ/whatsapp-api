@@ -1,0 +1,52 @@
+{
+  "info": {
+    "name": "WhatsApp Webhook API",
+    "_postman_id": "whatsapp-webhook-api-collection",
+    "description": "Collection to test the WhatsApp webhook verification endpoint.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET /webhook (verification)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/webhook?hub.mode=subscribe&hub.verify_token={{verifyToken}}&hub.challenge=CHALLENGE_TOKEN",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "webhook"
+          ],
+          "query": [
+            {
+              "key": "hub.mode",
+              "value": "subscribe"
+            },
+            {
+              "key": "hub.verify_token",
+              "value": "{{verifyToken}}"
+            },
+            {
+              "key": "hub.challenge",
+              "value": "CHALLENGE_TOKEN"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "verifyToken",
+      "value": "your_webhook_verify_token_here"
+    }
+  ]
+}
+
