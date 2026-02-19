@@ -17,6 +17,18 @@ Create a `.env` file (you can copy from `.env.example`):
 ```env
 PORT=3000
 WHATSAPP_VERIFY_TOKEN=your_webhook_verify_token_here
+WHATSAPP_ACCESS_TOKEN=your_whatsapp_access_token
+WHATSAPP_PHONE_NUMBER_ID=your_phone_number_id
+WHATSAPP_API_VERSION=v18.0
+GOOGLE_SHEETS_CREDENTIALS={"type":"service_account","project_id":"...","private_key":"...","client_email":"..."}
+```
+
+**Note for GOOGLE_SHEETS_CREDENTIALS**: This should be the entire JSON content from your `sheets-api-487808-c77092506b84.json` file as a single-line string. You can convert it using:
+```bash
+# On Mac/Linux:
+cat sheets-api-487808-c77092506b84.json | jq -c
+
+# Or manually copy the entire JSON and put it in quotes in your .env file
 ```
 
 - **Run locally**
@@ -45,6 +57,10 @@ npm run start
   - In your Railway project, go to the **Variables** tab.
   - Add:
     - `WHATSAPP_VERIFY_TOKEN` = the same token you will set in the Meta (Facebook) WhatsApp webhook configuration.
+    - `WHATSAPP_ACCESS_TOKEN` = your WhatsApp Business API access token
+    - `WHATSAPP_PHONE_NUMBER_ID` = your WhatsApp Business phone number ID
+    - `WHATSAPP_API_VERSION` = `v18.0` (or your preferred API version)
+    - `GOOGLE_SHEETS_CREDENTIALS` = the entire JSON content from your service account file as a single-line string (copy the entire JSON and paste it as the value)
   - You do **not** need to set `PORT`; Railway sets it automatically, and the app already uses `process.env.PORT`.
 
 - **4. Expose the webhook URL to Meta**

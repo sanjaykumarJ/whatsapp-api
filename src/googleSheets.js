@@ -1,14 +1,29 @@
 const { google } = require("googleapis");
-const path = require("path");
 
-// Load service account credentials JSON
-// Uses the file you provided: sheets-api-487808-c77092506b84.json
-// IMPORTANT: In production, keep this file safe and never commit it to public repos.
-const serviceAccountPath =
-  process.env.GOOGLE_SHEETS_CREDENTIALS_PATH ||
-  path.join(__dirname, "..", "sheets-api-487808-c77092506b84.json");
+// Load service account credentials from environment variable
+// The GOOGLE_SHEETS_CREDENTIALS env variable should contain the full JSON as a string
+// IMPORTANT: In production, keep this credential safe and never commit it to public repos.
+let serviceAccount;
 
-const serviceAccount = require(serviceAccountPath);
+try {
+  const credentialsJson = process.env.GOOGLE_SHEETS_CREDENTIALS;
+  
+  if (!credentialsJson) {
+    throw new Error(
+      "GOOGLE_SHEETS_CREDENTIALS environment variable is not set. " +
+      "Please set it to the JSON string of your Google service account credentials."
+    );
+  }
+
+  serviceAccount = JSON.parse(credentialsJson);
+  
+  if (!serviceAccount.client_email || !serviceAccount.private_key) {
+    throw new Error("Invalid Google Sheets credentials. Missing required fields.");
+  }
+} catch (error) {
+  console.error("[SHEETS] Error loading credentials:", error.message);
+  throw error;
+}
 
 // Google Sheets scopes
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
