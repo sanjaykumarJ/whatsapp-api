@@ -1,4 +1,5 @@
 const { google } = require("googleapis");
+require("dotenv").config();
 
 // Load service account credentials from environment variable
 // The GOOGLE_SHEETS_CREDENTIALS env variable should contain the full JSON as a string
