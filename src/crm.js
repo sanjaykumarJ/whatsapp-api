@@ -14,7 +14,7 @@ const { appendRow } = require("./googleSheets");
  */
 async function saveMessageToCrm(payload) {
   const record = {
-    id: leads.length + 1,
+    id: `${payload.from}-${payload.timestamp}`,
     from: payload.from,
     name: payload.name || null,
     message: payload.message,
