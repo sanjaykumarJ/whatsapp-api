@@ -1,7 +1,6 @@
 // Simple in-memory CRM storage.
 // Replace this with your actual CRM API integration (HubSpot, Salesforce, custom DB, etc.).
-
-const leads = [];
+const { appendRow } = require("./googleSheets");
 
 /**
  * Save a WhatsApp message into the CRM.
@@ -13,7 +12,7 @@ const leads = [];
  * @param {Object} [payload.raw] - Raw WhatsApp message object.
  * @returns {Object} The stored lead / interaction record.
  */
-function saveMessageToCrm(payload) {
+async function saveMessageToCrm(payload) {
   const record = {
     id: leads.length + 1,
     from: payload.from,
@@ -24,9 +23,14 @@ function saveMessageToCrm(payload) {
     createdAt: new Date().toISOString(),
   };
 
-  leads.push(record);
-  console.log("[CRM] Stored WhatsApp message in CRM store:", record);
-  return record;
+  try {
+    const response = await appendRow('Sheet1!A1:E1', [record.id, record.from, record.name, record.message, record.timestamp]);
+    console.log("[CRM] Stored WhatsApp message in CRM store:", response);
+    return response;
+  } catch (error) {
+    console.error("[CRM] Error storing WhatsApp message in CRM store:", error);
+    return null;
+  }
 }
 
 /**

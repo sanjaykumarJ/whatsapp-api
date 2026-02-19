@@ -36,6 +36,33 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "POST /send-message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"+919443285801\",\n  \"message\": \"optional\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/send-message",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "send-message"
+          ]
+        },
+        "description": "Send a template message to a WhatsApp Business Account. Uses 'renovation_marketing_template' template. Default phone number is +919443285801 if 'to' is not provided. Requires WHATSAPP_ACCESS_TOKEN and WHATSAPP_PHONE_NUMBER_ID to be set in environment variables."
+      },
+      "response": []
     }
   ],
   "variable": [
