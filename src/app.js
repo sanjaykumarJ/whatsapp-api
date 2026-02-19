@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
-const { appendRow } = require("./googleSheets");
 const { saveMessageToCrm, getAllCrmRecords } = require("./crm");
 
 require("dotenv").config();
@@ -181,11 +180,6 @@ app.post("/send-message", async (req, res) => {
       error: errorMessage,
     });
   }
-});
-
-app.get('/test-sheet', async (req, res) => {
-  const response = await appendRow('1V12fmiRPKjOaXg6G_o443idhvWmv3vs5n0WLNviAo14', 'Sheet1!A1:D1', ['+918608305358', 'Some message', 'timestamp']);
-  res.json(response);
 });
 
 app.listen(PORT, () => {
