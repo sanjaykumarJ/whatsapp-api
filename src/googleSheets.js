@@ -37,7 +37,7 @@ function getSheetsClient() {
   const auth = new google.auth.JWT(
     serviceAccount.client_email,
     null,
-    serviceAccount.private_key?.replace(/\\n/g, "\n"),
+    serviceAccount.private_key,
     SCOPES
   );
 
