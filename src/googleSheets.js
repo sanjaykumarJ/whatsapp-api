@@ -33,7 +33,6 @@ const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
  * Create an authenticated Google Sheets client using the service account.
  */
 function getSheetsClient() {
-    console.log(serviceAccount.private_key, serviceAccount.client_email)
   const auth = new google.auth.JWT(
     serviceAccount.client_email,
     null,
