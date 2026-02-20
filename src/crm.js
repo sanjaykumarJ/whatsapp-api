@@ -24,11 +24,14 @@ async function saveMessageToCrm(payload) {
   };
 
   try {
-    const recordArray = Array.from(record.id, record.from, record.name, record.message, record.timestamp)
-    console.log(recordArray)
+    // Create array of values for Google Sheets row
+    // Use array literal syntax: [value1, value2, ...]
+    const recordArray = [record.id, record.from, record.name, record.message, record.timestamp, record.createdAt];
+    console.log("[CRM] Row data:", recordArray);
     
+    // Append to Google Sheets (appendRow takes values array as parameter)
     const response = await appendRow(recordArray);
-    console.log("[CRM] Stored WhatsApp message in CRM store:", response);
+    console.log("[CRM] Stored WhatsApp message in Google Sheets:", response);
     return response;
   } catch (error) {
     console.error("[CRM] Error storing WhatsApp message in CRM store:", error);
