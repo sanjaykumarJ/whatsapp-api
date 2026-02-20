@@ -24,6 +24,8 @@ async function saveMessageToCrm(payload) {
   };
 
   try {
+    console.log({record});
+    
     const response = await appendRow('Sheet1!A1:F1', [record.id, record.from, record.name, record.message, record.timestamp]);
     console.log("[CRM] Stored WhatsApp message in CRM store:", response);
     return response;
