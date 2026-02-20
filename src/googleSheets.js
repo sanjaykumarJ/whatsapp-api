@@ -50,19 +50,17 @@ function getSheetsClient() {
  * @param {string} range - The A1 notation of a range to search for a logical table of data (e.g. "Sheet1!A1:D1").
  * @param {Array} values - Array of values for a single row, e.g. ["+918608305358", "Some message", "timestamp"].
  */
-async function appendRow(spreadsheetId='1V12fmiRPKjOaXg6G_o443idhvWmv3vs5n0WLNviAo14', range, values) {
+async function appendRow(values) {
   const sheets = getSheetsClient();
 
-  const resource = {
-    values: [values],
-  };
+
 console.log({values})
   const response = await sheets.spreadsheets.values.append({
     spreadsheetId: '1V12fmiRPKjOaXg6G_o443idhvWmv3vs5n0WLNviAo14',
     range:'Sheet1!A1:F1',
     valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
-    requestBody: { values: [values] },
+    requestBody: { values },
   });
 
   console.trace("[SHEETS] AppendRow response:", response.data);
