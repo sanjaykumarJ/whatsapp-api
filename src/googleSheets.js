@@ -60,7 +60,7 @@ console.log({values})
     range:'Sheet1!A1:F1',
     valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
-    requestBody: { values },
+    requestBody: { values: [values] },
   });
 
   console.trace("[SHEETS] AppendRow response:", response.data);
