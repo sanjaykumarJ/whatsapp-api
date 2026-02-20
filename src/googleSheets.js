@@ -56,7 +56,7 @@ async function appendRow(spreadsheetId='1V12fmiRPKjOaXg6G_o443idhvWmv3vs5n0WLNvi
   const resource = {
     values: [values],
   };
-
+console.log(values)
   const response = await sheets.spreadsheets.values.append({
     spreadsheetId: '1V12fmiRPKjOaXg6G_o443idhvWmv3vs5n0WLNviAo14',
     range:'Sheet1!A1:F1',
@@ -65,7 +65,7 @@ async function appendRow(spreadsheetId='1V12fmiRPKjOaXg6G_o443idhvWmv3vs5n0WLNvi
     requestBody: { values: [values] },
   });
 
-  console.log("[SHEETS] AppendRow response:", response.data);
+  console.trace("[SHEETS] AppendRow response:", response.data);
   return response.data;
 }
 
